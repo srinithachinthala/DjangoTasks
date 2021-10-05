@@ -1,0 +1,9 @@
+{% extends 'first.html' %}
+{% block content %}
+{{B.as_p}}
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="upadate">
+    <a href="{% url 'baseview' %}">BackHome</a>
+</form>
+{% endblock %}

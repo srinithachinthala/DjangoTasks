@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+</head>
+<body>
+{% block content %}
+<h1 align="center">Welcome to SafeBus</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Add Passenger Details</h4>
+            <form action="" method="post" >
+            {% csrf_token %}
+             {{B.as_p}}
+            <input type="submit" value="register" >
+            </form>
+        </div>
+         <div class="col-sm-7 offset-1">
+         <h4 align="center">Passenger details</h4>
+             {% if d %}
+             <table border="2px" class="table table-hover" >
+              <tr >
+                  <th scope="col">Name</th>
+                  <th scope="col"> Age</th>
+                  <th scope="col"> Gender</th>
+                   <th scope="col"> Action</th>
+              </tr>
+              {% for i in d %}
+              <tr>
+                  <td scope="col"> {{i.Name}}</td>
+                  <td scope="col">  {{i.Age}}</td>
+                  <td scope="col"> {{i.Gender}}</td>
+                  <td><a href="{% url 'update' i.id %}">Edit</a>
+                  <form action="{% url 'deletedata' i.id %}" method="post">
+                      {% csrf_token %}
+                      <input type="submit" value="Delete">
+                  </form>
+                  </td>
+              </tr>
+               {% endfor %}
+            </table>
+             {% else %}
+             <h4>No records</h4>
+             {% endif %}
+
+
+         </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>
